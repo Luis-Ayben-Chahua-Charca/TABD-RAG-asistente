@@ -1,9 +1,10 @@
 FROM python:3.12-slim
 
-# Instala OCR y herramientas necesarias
+# Instala OCR, libGL (para procesamiento de PDF con imagen) y otras herramientas necesarias
 RUN apt-get update && apt-get install -y \
     tesseract-ocr \
     poppler-utils \
+    libgl1 \
     curl \
     && rm -rf /var/lib/apt/lists/*
 

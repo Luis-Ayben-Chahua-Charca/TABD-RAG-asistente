@@ -6,6 +6,8 @@ Este proyecto implementa un **asistente inteligente** que permite consultar docu
 
 ## Características
 
+- Usuario del login: admin
+- Contraseña: 1234
 - Subida y vectorización automática de archivos `.pdf`, `.docx`, `.txt`, `.md`
 - Consulta semántica usando Large Language Models (LLMs) vía Ollama
 - Interface web con Flask y Bootstrap
