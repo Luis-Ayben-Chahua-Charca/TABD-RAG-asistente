@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  asistente-rag:
+    build: .
+    container_name: asistente_rag_app
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./docs:/app/docs
+      - ./chroma_data:/app/chroma_data
+    environment:
+      - FLASK_ENV=development
+    restart: unless-stopped

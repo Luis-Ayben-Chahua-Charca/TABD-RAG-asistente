@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+venv/
+chroma_data/
+docs/
+*.pdf
+*.bin
+*.pt
+*.safetensors
+*.onnx

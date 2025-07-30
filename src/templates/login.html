@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="card shadow p-4" style="max-width: 400px; margin: auto;">
+    <h2 class="mb-4 text-center">🔐 Iniciar sesión</h2>
+    {% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
+    <form method="POST">
+        <input type="text" name="usuario" class="form-control mb-3" placeholder="Usuario">
+        <input type="password" name="password" class="form-control mb-3" placeholder="Contraseña">
+        <button type="submit" class="btn btn-dark w-100">Entrar</button>
+    </form>
+</div>
+{% endblock %}

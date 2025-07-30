@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="card shadow p-4">
+    <h1 class="text-center mb-4">Asistente RAG</h1>
+
+    <p>Haz una pregunta sobre los documentos:</p>
+    <textarea id="pregunta" class="form-control" rows="4" placeholder="Escribe tu pregunta aquí..."></textarea>
+    <button class="btn btn-primary mt-3" onclick="consultar()">Consultar</button>
+
+    <div id="respuesta" class="alert alert-secondary mt-4" style="white-space: pre-wrap;"></div>
+
+    <h5 class="mt-4"> Historial de consultas</h5>
+    <ul id="historial" class="list-group mb-4"></ul>
+</div>
+{% endblock %}

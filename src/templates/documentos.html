@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="card shadow p-4">
+    <h1 class="text-center mb-4"> Gestión de documentos</h1>
+
+    <form id="formularioSubida" enctype="multipart/form-data">
+        <input type="file" class="form-control" id="file" accept=".pdf,.docx,.txt,.md">
+        <button class="btn btn-success mt-3" type="submit">Subir</button>
+    </form>
+    <div id="resultadoSubida" class="mt-3 text-muted"></div>
+
+    <hr>
+    <h5><i class="bi bi-file-earmark-text-fill"></i> Documentos vectorizados</h5>
+    <div id="documentos-loading" class="text-muted mb-2 d-none">🔄 Cargando lista...</div>
+    <ul id="listaDocumentos" class="list-group mb-4"></ul>
+ 
+</div>
+{% endblock %}
