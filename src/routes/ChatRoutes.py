@@ -20,15 +20,16 @@ def ask():
     resultado = handle_query(question)
     _historial.append({
         "pregunta": question,
+        "pregunta_reescrita": resultado["pregunta_reescrita"],
         "respuesta": resultado["respuesta"],
         "tiempo": resultado["tiempo"]
     })
     return jsonify({
         "response": resultado["respuesta"],
-        "tiempo": resultado["tiempo"]
+        "tiempo": resultado["tiempo"],
+        "pregunta_reescrita": resultado["pregunta_reescrita"]
     })
-
 
 @chat_bp.route("/historial", methods=["GET"])
 def ver_historial():
-    return jsonify({"historial": _historial[-10:]})  # Últimos 10 elementos
+    return jsonify({"historial": _historial[-10:]})

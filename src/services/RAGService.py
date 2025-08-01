@@ -1,7 +1,7 @@
 from database.chroma_client import get_chroma_client
 from chromadb.utils import embedding_functions
 import subprocess
-import subprocess
+import requests
 import time
 
 COLLECTION_NAME = "documentos_empresa"
@@ -11,7 +11,7 @@ embedding_function = embedding_functions.SentenceTransformerEmbeddingFunction(
     model_name="all-MiniLM-L6-v2"
 )
 
-def rewrite_query(question: str, model: str = "mistral") -> str:
+def rewrite_query(question: str) -> str:
     prompt = f"""Reescribe la siguiente pregunta para que sea más clara, específica y útil para buscar información en documentos técnicos o institucionales.
 
 Pregunta original:
@@ -19,13 +19,11 @@ Pregunta original:
 
 Pregunta reformulada:"""
 
-    result = subprocess.run(
-        ["ollama", "run", model],
-        input=prompt.encode(),
-        capture_output=True,
-        timeout=30
+    response = requests.post(
+        "http://host.docker.internal:11434/api/generate",  # ← usa Ollama desde el host
+        json={"model": "mistral", "prompt": prompt, "stream": False}
     )
-    return result.stdout.decode().strip()
+    return response.json()["response"].strip()
 
 def retrieve_context(question: str, k: int = 5) -> str:
     client = get_chroma_client()
@@ -52,13 +50,11 @@ def build_prompt(question: str, context: str) -> str:
 
 
 def generate_response(prompt: str, model: str = "mistral") -> str:
-    result = subprocess.run(
-        ["ollama", "run", model],
-        input=prompt.encode(),
-        capture_output=True,
-        timeout=60
+    response = requests.post(
+        "http://host.docker.internal:11434/api/generate",
+        json={"model": model, "prompt": prompt, "stream": False}
     )
-    return result.stdout.decode().strip()
+    return response.json()["response"].strip()
 
 
 def handle_query(question: str) -> dict:

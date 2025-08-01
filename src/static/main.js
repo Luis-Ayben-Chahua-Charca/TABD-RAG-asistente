@@ -1,5 +1,6 @@
 async function consultar() {
     const pregunta = document.getElementById('pregunta').value;
+
     const res = await fetch('/ask', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -7,15 +8,21 @@ async function consultar() {
     });
 
     const data = await res.json();
-    const respuesta = data.response || 'Error al obtener respuesta';
-    const tiempo = data.tiempo ? `\n⏱️ Tiempo: ${data.tiempo}` : '';
 
-    document.getElementById('respuesta').innerText = respuesta + tiempo;
+    // Muestra respuesta
+    document.getElementById('respuesta').innerText = data.response || 'Error al obtener respuesta';
+
+    // Muestra reformulación si existe
     document.getElementById('preguntaReescrita').innerText = data.pregunta_reescrita || '';
 
+    // Muestra tiempo si existe
+    if (data.tiempo) {
+        document.getElementById('respuesta').innerText += `\n⏱️ Tiempo: ${data.tiempo}`;
+    }
+
+    // Carga historial actualizado
     await cargarHistorial();
 }
-
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("formularioSubida");
     if (form) {
