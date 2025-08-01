@@ -11,6 +11,7 @@ async function consultar() {
     const tiempo = data.tiempo ? `\n⏱️ Tiempo: ${data.tiempo}` : '';
 
     document.getElementById('respuesta').innerText = respuesta + tiempo;
+    document.getElementById('preguntaReescrita').innerText = data.pregunta_reescrita || '';
 
     await cargarHistorial();
 }
